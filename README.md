@@ -13,7 +13,7 @@ A sample app for my portfolio using live data from [Shoe Zone's](https://shoezon
 ## About
 **we:heart:shoes** is a web application designed as a demo for my personal portfolio. It is designed to enabled Shoe Zone staff to perform instant stock enquiries without the use of the till.
 
-we:heart:shoes is built using [React](https://github.com/facebook/react/) on the client side, and [Express](https://github.com/expressjs/express) on the server (hosted on [RunKit](https://runkit.com)). The client app uses the current device's geolocation in order to locate the user's nearest store. This then allows the app to check the store's stock levels.
+we:heart:shoes is built using [React](https://github.com/facebook/react/) on the client side (with customised core components provided by [Material-UI](https://github.com/mui-org/material-ui)), and [Express](https://github.com/expressjs/express) on the server (hosted on [RunKit](https://runkit.com)). The client app uses the current device's geolocation in order to locate the user's nearest store. This then allows the app to check the store's stock levels.
 
 ## Draft Designs
 ### First Draft
@@ -40,3 +40,4 @@ https://untitled-bzxwlvj4h4dk.runkit.sh/
 * React - https://github.com/facebook/react/
 * Express - https://github.com/expressjs/express
 * RunKit - https://runkit.com
+* Material-UI - https://github.com/mui-org/material-ui
