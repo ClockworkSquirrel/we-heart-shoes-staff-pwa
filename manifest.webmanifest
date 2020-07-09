@@ -4,23 +4,23 @@
     "description": "Check current available stock levels in-store and online using live data from Shoe Zone",
     "icons": [
       {
-        "src": "/icon.png",
+        "src": "/we-heart-shoes-staff-pwa/icon.png",
         "sizes": "196x196",
         "type": "image/png",
         "purpose": "any maskable"
       }
     ],
-    "start_url": "/",
+    "start_url": "/we-heart-shoes-staff-pwa",
     "background_color": "#FAFAFA",
     "display": "standalone",
-    "scope": "/",
+    "scope": "/we-heart-shoes-staff-pwa",
     "theme_color": "#002F87",
     "shortcuts": [
       {
         "name": "Scan a Barcode",
         "short_name": "Scan",
         "description": "Open the barcode scanner to scan a product's barcode",
-        "url": "/?scan"
+        "url": "/we-heart-shoes-staff-pwa?scan"
       }
     ]
   }
