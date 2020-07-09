@@ -30,7 +30,11 @@ we:heart:shoes is built using [React](https://github.com/facebook/react/) on the
 ### REST API
 The REST API is hosted on RunKit and performs core functionality for the client, such as locating the user's nearest store, retrieving product details, and checking a store's stock levels.
 
+**The source code for the server can be found here:**
 https://runkit.com/clockworksquirrel/5eff1349ea0eb3001a60af53
+
+**The public API is hosted at:**
+https://untitled-bzxwlvj4h4dk.runkit.sh/
 
 ### Frameworks
 * React - https://github.com/facebook/react/

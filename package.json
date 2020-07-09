@@ -2,6 +2,7 @@
   "name": "we-heart-shoes-staff-pwa",
   "version": "1.0.0",
   "description": "Check current available stock levels in-store and online using live data from Shoe Zone",
+  "homepage": "https://clockworksquirrel.github.io/we-heart-shoes-staff-pwa",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
@@ -17,13 +18,16 @@
     "react-webcam-barcode-scanner": "0.0.2-rc1"
   },
   "devDependencies": {
+    "gh-deploy": "^0.2.3",
     "typescript": "3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
