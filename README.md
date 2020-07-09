@@ -17,13 +17,13 @@ we♥shoes is built using [React](https://github.com/facebook/react/) on the cli
 
 ## Draft Designs
 ### First Draft
-| |
-|-|
+| Home                                   |
+|----------------------------------------|
 | ![Home](./images/figma-home-first.png) |
 
 ### Final Draft
-| | |
-|-|-|
+| Home                             |                        Product Details |
+|----------------------------------|----------------------------------------|
 | ![Home](./images/figma-home.png) | ![Details](./images/figma-details.png) |
 
 ## Additional Resources
