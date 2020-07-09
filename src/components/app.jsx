@@ -5,7 +5,7 @@ import EphemeralStore from "../stores/ephemeralStore"
 
 import { Helmet } from "react-helmet"
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { HashRouter as Router, Switch, Route } from "react-router-dom"
 import { CssBaseline } from "@material-ui/core"
 import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
 
