@@ -93,17 +93,17 @@ const ProductStockSize = ({
 
     return (
         <Card elevation={0} className={classes.sizeCard} key={size.SizeCode}>
-            <CardActionArea
-                className={classes.cardMain}
-                onClick={onCardClicked}
+            <Tooltip
+                title={
+                    size.SizeUK
+                    ? `UK Size ${size.SizeUK} (est.)`
+                    : ""
+                }
+                placement="top"
             >
-                <Tooltip
-                    title={
-                        size.SizeUK
-                        ? `UK Size ${size.SizeUK} (est.)`
-                        : ""
-                    }
-                    placement="top"
+                <CardActionArea
+                    className={classes.cardMain}
+                    onClick={onCardClicked}
                 >
                     <div className={
                         clsx(classes.cardSize, {
@@ -122,32 +122,32 @@ const ProductStockSize = ({
                             }
                         </Typography>
                     </div>
-                </Tooltip>
 
-                <CardContent className={classes.cardContent}>
-                    <Typography variant="h6" className={classes.storeStockText}>
-                        {
-                            hasError
-                            ? "An error ocurred"
-                            : inStock
-                                ? `In stock in ${storeName}`
-                                : isLoading
-                                    ? "Checking the stock room..."
-                                    : stockRequested
-                                        ? `Out of stock in ${storeName}`
-                                        : `Tap to check stock in ${storeName}`
-                        }
-                    </Typography>
+                    <CardContent className={classes.cardContent}>
+                        <Typography variant="h6" className={classes.storeStockText}>
+                            {
+                                hasError
+                                ? "An error ocurred"
+                                : inStock
+                                    ? `In stock in ${storeName}`
+                                    : isLoading
+                                        ? "Checking the stock room..."
+                                        : stockRequested
+                                            ? `Out of stock in ${storeName}`
+                                            : `Tap to check stock in ${storeName}`
+                            }
+                        </Typography>
 
-                    <Typography variant="h6" className={classes.onlineStockText}>
-                        {
-                            (size.Stock > 0)
-                            ? `x${size.Stock?.toLocaleString()} in stock online`
-                            : "Out of stock online"
-                        }
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
+                        <Typography variant="h6" className={classes.onlineStockText}>
+                            {
+                                (size.Stock > 0)
+                                ? `x${size.Stock?.toLocaleString()} in stock online`
+                                : "Out of stock online"
+                            }
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+            </Tooltip>
         </Card>
     )
 }
