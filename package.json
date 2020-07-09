@@ -1,0 +1,34 @@
+{
+  "name": "we-heart-shoes-staff-pwa",
+  "version": "1.0.0",
+  "description": "Check current available stock levels in-store and online using live data from Shoe Zone",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@material-ui/core": "4.11.0",
+    "@material-ui/icons": "4.9.1",
+    "@material-ui/lab": "4.0.0-alpha.56",
+    "@risingstack/react-easy-state": "6.3.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-helmet": "6.1.0",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "3.0.1",
+    "react-webcam-barcode-scanner": "0.0.2-rc1"
+  },
+  "devDependencies": {
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
