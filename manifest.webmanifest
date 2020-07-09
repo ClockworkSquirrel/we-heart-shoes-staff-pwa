@@ -1,0 +1,26 @@
+{
+    "short_name": "Stock Check",
+    "name": "Stock Check",
+    "description": "Check current available stock levels in-store and online using live data from Shoe Zone",
+    "icons": [
+      {
+        "src": "/icon.png",
+        "sizes": "196x196",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#FAFAFA",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#002F87",
+    "shortcuts": [
+      {
+        "name": "Scan a Barcode",
+        "short_name": "Scan",
+        "description": "Open the barcode scanner to scan a product's barcode",
+        "url": "/?scan"
+      }
+    ]
+  }
