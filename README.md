@@ -1,14 +1,18 @@
 <p align="center">
-    <img
-        src="./images/icon.png"
-        alt="we:heart:shoes logo"
-        width="128"
-        style="margin-top: 3rem; border-radius: 100% 100% 2rem"
-    />
+    <a href="https://clockworksquirrel.github.io/we-heart-shoes-staff-pwa">
+        <img
+            src="./images/icon.png"
+            alt="we:heart:shoes logo"
+            width="128"
+            style="margin-top: 3rem; border-radius: 100% 100% 2rem"
+        />
+    </a>
 </p>
 
 # we:heart:shoes
 A sample app for my portfolio using live data from [Shoe Zone's](https://shoezone.com) website.
+
+View the live app at: https://clockworksquirrel.github.io/we-heart-shoes-staff-pwa
 
 ## About
 **we:heart:shoes** is a web application designed as a demo for my personal portfolio. It is designed to enabled Shoe Zone staff to perform instant stock enquiries without the use of the till.
