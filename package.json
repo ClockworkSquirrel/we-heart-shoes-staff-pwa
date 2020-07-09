@@ -18,7 +18,7 @@
     "react-webcam-barcode-scanner": "0.0.2-rc1"
   },
   "devDependencies": {
-    "gh-deploy": "^0.2.3",
+    "gh-pages": "^3.1.0",
     "typescript": "3.8.3"
   },
   "scripts": {
@@ -27,7 +27,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-deploy -d build"
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
