@@ -99,7 +99,7 @@ const ProductStockSize = ({
             >
                 <Tooltip
                     title={
-                        inStock && size.SizeUK
+                        size.SizeUK
                         ? `UK Size ${size.SizeUK} (est.)`
                         : ""
                     }
