@@ -52,7 +52,7 @@ const App = () => {
 
       <ThemeProvider theme={defaultTheme}>
         <div className={classes.root}>
-          <Router basename={process.env.PUBLIC_URL}>
+          <Router>
             <Header />
 
             {
