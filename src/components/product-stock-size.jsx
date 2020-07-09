@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { view } from "@risingstack/react-easy-state"
 import EphemeralStore from "../stores/ephemeralStore"
 
-import { Card, CardActionArea, Typography, CardContent } from "@material-ui/core"
+import { Card, CardActionArea, Typography, CardContent, Tooltip } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 import { RestAPI } from "../hooks/useAPI"
@@ -97,23 +97,32 @@ const ProductStockSize = ({
                 className={classes.cardMain}
                 onClick={onCardClicked}
             >
-                <div className={
-                    clsx(classes.cardSize, {
-                        [classes.cardSizePrimary]: inStock
-                    })
-                }>
-                    <Typography variant="h6" className={
-                        clsx(classes.cardSizeText, {
-                            [classes.cardSizeTextPrimary]: inStock
+                <Tooltip
+                    title={
+                        inStock
+                        ? size.SizeUK ?? size.Size
+                        : ""
+                    }
+                    placement="top"
+                >
+                    <div className={
+                        clsx(classes.cardSize, {
+                            [classes.cardSizePrimary]: inStock
                         })
                     }>
-                        {
-                            isLoading
-                            ? <CentreSpinner size="1.71rem" />
-                            : size.Size
-                        }
-                    </Typography>
-                </div>
+                        <Typography variant="h6" className={
+                            clsx(classes.cardSizeText, {
+                                [classes.cardSizeTextPrimary]: inStock
+                            })
+                        }>
+                            {
+                                isLoading
+                                ? <CentreSpinner size="1.71rem" />
+                                : size.Size
+                            }
+                        </Typography>
+                    </div>
+                </Tooltip>
 
                 <CardContent className={classes.cardContent}>
                     <Typography variant="h6" className={classes.storeStockText}>
