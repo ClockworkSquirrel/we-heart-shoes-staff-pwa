@@ -96,8 +96,10 @@ const ProductStockSize = ({
             <Tooltip
                 title={
                     size.SizeUK
-                    ? `UK Size ${size.SizeUK} (est.)`
-                    : ""
+                        ? `UK Size ${size.SizeUK} (est.)`
+                        : size.SizeIsNumeric
+                            ? undefined
+                            : `Size Code: ${size.SizeCode}`
                 }
                 placement="top"
             >
@@ -117,8 +119,8 @@ const ProductStockSize = ({
                         }>
                             {
                                 isLoading
-                                ? <CentreSpinner size="1.71rem" />
-                                : size.Size
+                                    ? <CentreSpinner size="1.71rem" />
+                                    : size.Size
                             }
                         </Typography>
                     </div>
@@ -127,22 +129,22 @@ const ProductStockSize = ({
                         <Typography variant="h6" className={classes.storeStockText}>
                             {
                                 hasError
-                                ? "An error ocurred"
-                                : inStock
-                                    ? `In stock in ${storeName}`
-                                    : isLoading
-                                        ? "Checking the stock room..."
-                                        : stockRequested
-                                            ? `Out of stock in ${storeName}`
-                                            : `Tap to check stock in ${storeName}`
+                                    ? "An error ocurred"
+                                    : inStock
+                                        ? `In stock in ${storeName}`
+                                        : isLoading
+                                            ? "Checking the stock room..."
+                                            : stockRequested
+                                                ? `Out of stock in ${storeName}`
+                                                : `Tap to check stock in ${storeName}`
                             }
                         </Typography>
 
                         <Typography variant="h6" className={classes.onlineStockText}>
                             {
                                 (size.Stock > 0)
-                                ? `x${size.Stock?.toLocaleString()} in stock online`
-                                : "Out of stock online"
+                                    ? `x${size.Stock?.toLocaleString()} in stock online`
+                                    : "Out of stock online"
                             }
                         </Typography>
                     </CardContent>

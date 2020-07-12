@@ -15,6 +15,7 @@ import CentreSpinner from "./centre-spinner"
 
 import HomeView from "../views/index"
 import ProductView from "../views/product"
+import { Alert, AlertTitle } from "@material-ui/lab"
 
 const defaultTheme = createMuiTheme({
   typography: {
@@ -34,6 +35,9 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     maxWidth: 500,
     margin: `${theme.spacing(1)}px auto`
+  },
+  geoError: {
+    marginTop: theme.spacing(2)
   }
 }))
 
@@ -47,7 +51,11 @@ const App = () => {
       <Helmet
         titleTemplate="%s - we♥shoes"
         defaultTitle="we♥shoes"
-        title="Loading..."
+        title={
+          EphemeralStore.store.error
+            ? "Oops!"
+            : "Loading..."
+        }
       />
 
       <ThemeProvider theme={defaultTheme}>
@@ -57,13 +65,22 @@ const App = () => {
 
             {
               EphemeralStore.store.error
-              ? `Error: ${EphemeralStore.store.error}`
-              : EphemeralStore.store.name
-                ? <Switch>
-                    <Route path="/" exact component={HomeView} />
-                    <Route path="/product/:style" component={ProductView} />
-                  </Switch>
-                : <CentreSpinner />
+                ? (
+                  <Alert severity="error" className={classes.geoError}>
+                    <AlertTitle>Error</AlertTitle>
+                    {
+                      EphemeralStore.store.error?.toLowerCase()?.indexOf("denied") > -1
+                        ? "Please allow location access to use the app."
+                        : EphemeralStore.store.error
+                    }
+                  </Alert>
+                )
+                : EphemeralStore.store.name
+                  ? <Switch>
+                      <Route path="/" exact component={HomeView} />
+                      <Route path="/product/:style" component={ProductView} />
+                    </Switch>
+                  : <CentreSpinner />
             }
 
             <ScannerModal />

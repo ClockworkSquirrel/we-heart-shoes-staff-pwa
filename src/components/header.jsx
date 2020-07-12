@@ -58,10 +58,10 @@ const Header = () => {
             <Typography variant="body1" component="p" className={classes.headerStoreInfo}>
                 {
                     EphemeralStore.store.error
-                    ? ""
-                    : EphemeralStore.store.name
-                        ? `${EphemeralStore.store.name} - ${EphemeralStore.store.id}`
-                        : "Determining Location..."
+                        ? ""
+                        : EphemeralStore.store.name
+                            ? `${EphemeralStore.store.name} - ${EphemeralStore.store.id}`
+                            : "Determining Location..."
                 }
             </Typography>
 

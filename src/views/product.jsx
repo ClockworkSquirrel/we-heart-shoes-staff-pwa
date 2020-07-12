@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center",
         overflow: "hidden",
         borderRadius: theme.shape.borderRadius,
-        marginTop: theme.spacing(1),
+        margin: theme.spacing(1, 0),
         border: `1px solid ${theme.palette.divider}`,
 
         "& img": {
@@ -155,6 +155,10 @@ const ProductView = () => {
                         </Fab>
                     </Tooltip>
                 </div>
+
+                <Alert severity="info">
+                    Hold down an EU size to see the estimated UK equivalent.
+                </Alert>
 
                 <ProductStock
                     styleCode={info.StyleCode}

@@ -28,7 +28,6 @@ const EphemeralStore = store({
             id: result.StoreId
         }
     }).catch(err => {
-        console.error(`Geolocation: ${err.message}`)
         EphemeralStore.store.error = err.message
     })
 })
