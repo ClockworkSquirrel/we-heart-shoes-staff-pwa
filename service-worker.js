@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/we-heart-shoes-staff-pwa/precache-manifest.e3ce0a123843356abc4ed86e8b754a29.js"
+  "/we-heart-shoes-staff-pwa/precache-manifest.56fdb696af11af876ccc6e68106b6601.js"
 );
 
 self.addEventListener('message', (event) => {
