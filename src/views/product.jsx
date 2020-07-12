@@ -156,14 +156,19 @@ const ProductView = () => {
                     </Tooltip>
                 </div>
 
-                <Alert severity="info">
-                    Hold down an EU size to see the estimated UK equivalent.
-                </Alert>
+                {
+                    info.SizeType !== "UK" && (
+                        <Alert severity="info">
+                            {`Hold down ${info.SizeType === "EU" ? "an EU" : "a"} size to see the estimated UK equivalent.`}
+                        </Alert>
+                    )
+                }
 
                 <ProductStock
                     styleCode={info.StyleCode}
                     sizeRange={info.SizeRange}
                     className={classes.stockSizeContainer}
+                    category={info.Category}
                 />
             </div>
         )

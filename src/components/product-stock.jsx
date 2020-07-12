@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core"
 
 import ProductStockSize from "./product-stock-size"
 
-const ProductStock = ({ styleCode = "", sizeRange = [], ...props }) => {
+const ProductStock = ({ styleCode = "", sizeRange = [], category = "", ...props }) => {
     return (
         <Grid container spacing={.5} {...props}>
             {
@@ -13,6 +13,7 @@ const ProductStock = ({ styleCode = "", sizeRange = [], ...props }) => {
                         <ProductStockSize
                             styleCode={styleCode}
                             size={size}
+                            category={category}
                         />
                     </Grid>
                 ))

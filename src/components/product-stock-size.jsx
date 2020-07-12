@@ -59,9 +59,31 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+// array of conversion values
+const SizeGuide = {
+    letter: [
+        { size: "S", equiv: "3-4", gender: "W" },
+        { size: "M", equiv: "5-6", gender: "W" },
+        { size: "L", equiv: "7-8", gender: "W" },
+        { size: "XL", equiv: "9-10", gender: "W" },
+        { size: "S", equiv: "7-8", gender: "M" },
+        { size: "M", equiv: "9-10", gender: "M" },
+        { size: "L", equiv: "11-12", gender: "M" },
+        { size: "XL", equiv: "13-14", gender: "M" }
+    ]
+}
+
+// maps letter sizes to a size range as detailed above in "SizeGuide"
+// e.g. "S" is equivalent to sizes 3-4 in ladies and 7-8 in mens.
+const letterSizeToRange = (size = "", gender = "W") =>
+    SizeGuide.letter.filter(
+        ({ size: valSize, gender: valGend }) => valSize === size.toUpperCase() && valGend === gender.toUpperCase()
+    )?.[0]?.equiv ?? "unavailable"
+
 const ProductStockSize = ({
     styleCode = "",
-    size = {}
+    size = {},
+    category = ""
 }) => {
     const classes = useStyles()
 
@@ -91,18 +113,15 @@ const ProductStockSize = ({
             .finally(() => setLoading(false))
     }
 
-    return (
-        <Card elevation={0} className={classes.sizeCard} key={size.SizeCode}>
-            <Tooltip
-                title={
-                    size.SizeUK
+    const sizeTooltipContent = size.SizeUK
                         ? `UK Size ${size.SizeUK} (est.)`
                         : size.SizeIsNumeric
-                            ? undefined
-                            : `Size Code: ${size.SizeCode}`
-                }
-                placement="top"
-            >
+                            ? ""
+                            : `UK Size ${letterSizeToRange(size.Size, category[0])} (est.)`
+
+    return (
+        <Card elevation={0} className={classes.sizeCard} key={size.SizeCode}>
+            <Tooltip title={sizeTooltipContent} placement="top">
                 <CardActionArea
                     className={classes.cardMain}
                     onClick={onCardClicked}
