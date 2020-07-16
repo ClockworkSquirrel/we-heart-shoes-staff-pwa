@@ -12,7 +12,7 @@ const PersistentStore = store({
     pushHistory: async (productInfo) => {
         let matchedIndex = undefined
         for (let idx in PersistentStore.data.history) {
-            if (PersistentStore.data.history[idx].StyleCode === productInfo.StyleCode) {
+            if (PersistentStore.data.history[idx].StyleCode === productInfo.id) {
                 matchedIndex = idx
                 break
             }
@@ -20,10 +20,10 @@ const PersistentStore = store({
 
         if (matchedIndex === undefined) {
             PersistentStore.data.history.unshift({
-                StyleCode: productInfo.StyleCode,
-                Name: productInfo.Name,
-                Price: productInfo.Price,
-                Thumbnail: productInfo.Thumbnail
+                StyleCode: productInfo.id,
+                Name: productInfo.name,
+                Price: productInfo.price.current,
+                Thumbnail: productInfo.thumbnail
             })
         } else {
             PersistentStore.data.history.splice(

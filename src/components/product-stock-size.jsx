@@ -7,7 +7,6 @@ import EphemeralStore from "../stores/ephemeralStore"
 import { Card, CardActionArea, Typography, CardContent, Tooltip } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
-import { RestAPI } from "../hooks/useAPI"
 import CentreSpinner from "./centre-spinner"
 
 const useStyles = makeStyles(theme => ({
@@ -70,6 +69,36 @@ const SizeGuide = {
         { size: "M", equiv: "9-10", gender: "M" },
         { size: "L", equiv: "11-12", gender: "M" },
         { size: "XL", equiv: "13-14", gender: "M" }
+    ],
+    eu: [
+        { uk: 1, eu: 21 },
+        { uk: 2, eu: 22 },
+        { uk: 3, eu: 23 },
+        { uk: 4, eu: 24 },
+        { uk: 5, eu: 25 },
+        { uk: 6, eu: 26 },
+        { uk: 7, eu: 27 },
+        { uk: 8, eu: 28 },
+        { uk: 9, eu: 29 },
+        { uk: 10, eu: 30 },
+        { uk: 11, eu: 31 },
+        { uk: 12, eu: 32 },
+        { uk: 13, eu: 33 },
+        { uk: 1, eu: 34 },
+        { uk: 2, eu: 35 },
+        { uk: 3, eu: 36 },
+        { uk: 4, eu: 37 },
+        { uk: 5, eu: 38 },
+        { uk: 6, eu: 39 },
+        { uk: 7, eu: 40 },
+        { uk: 8, eu: 41 },
+        { uk: 9, eu: 42 },
+        { uk: 10, eu: 43 },
+        { uk: 11, eu: 44 },
+        { uk: 12, eu: 45 },
+        { uk: 13, eu: 46 },
+        { uk: 14, eu: 47 },
+        { uk: 15, eu: 48 }
     ]
 }
 
@@ -79,6 +108,24 @@ const letterSizeToRange = (size = "", gender = "W") =>
     SizeGuide.letter.filter(
         ({ size: valSize, gender: valGend }) => valSize === size.toUpperCase() && valGend === gender.toUpperCase()
     )?.[0]?.equiv ?? "unavailable"
+
+// determine sizing type - will return a string containing one of:
+// "EU" for European sizing, "UK" for UK sizing or "SML" for letter
+// sizing (S, M, L, XL)
+const determineSizeType = (size = "") => {
+    if (size.replace(/[A-Z]/gi, "").length)
+        return Number(size) > 15 ? "EU" : "UK"
+
+    return "SML"
+}
+
+// maps EU sizes to a best-guess UK equivalent
+const euSizeToUK = (size = "", gender = "W") => {
+    const euSize = Math.floor(Number(size) + .5)
+    const matchedSize = SizeGuide.eu.filter(({ eu }) => eu === euSize)
+
+    return matchedSize?.[0]?.uk - (gender === "W" ? 0 : 1) ?? "unavailable"
+}
 
 const ProductStockSize = ({
     styleCode = "",
@@ -105,22 +152,23 @@ const ProductStockSize = ({
         setRequested(true)
         setLoading(true)
 
-        fetch(`${RestAPI}/stock/${storeId}/${styleCode}${size.SizeCode}`)
+        return fetch(`${process.env.REACT_APP_API_URL}/api/stock/${storeId}/${styleCode}${size.code}`)
             .then(res => res.json()).then(({ result }) => {
-                setInStock(result?.InStock)
+                setInStock(result?.inStock)
             })
-            .catch(err => setError(err.message))
-            .finally(() => setLoading(false))
+        .catch(err => setError(err.message))
+        .finally(() => setLoading(false))
     }
 
-    const sizeTooltipContent = size.SizeUK
-                        ? `UK Size ${size.SizeUK} (est.)`
-                        : size.SizeIsNumeric
+    const sizeType = determineSizeType(size.size)
+    const sizeTooltipContent = sizeType === "EU"
+                        ? `UK Size ${euSizeToUK(size.size, category?.[0]?.[0]?.toUpperCase())} (est.)`
+                        : sizeType === "UK"
                             ? ""
-                            : `UK Size ${letterSizeToRange(size.Size, category[0])} (est.)`
+                            : `UK Size ${letterSizeToRange(size.size, category?.[0]?.[0]?.toUpperCase())} (est.)`
 
     return (
-        <Card elevation={0} className={classes.sizeCard} key={size.SizeCode}>
+        <Card elevation={0} className={classes.sizeCard} key={size.code}>
             <Tooltip title={sizeTooltipContent} placement="top">
                 <CardActionArea
                     className={classes.cardMain}
@@ -139,7 +187,7 @@ const ProductStockSize = ({
                             {
                                 isLoading
                                     ? <CentreSpinner size="1.71rem" />
-                                    : size.Size
+                                    : size.size
                             }
                         </Typography>
                     </div>
@@ -161,8 +209,8 @@ const ProductStockSize = ({
 
                         <Typography variant="h6" className={classes.onlineStockText}>
                             {
-                                (size.Stock > 0)
-                                    ? `x${size.Stock?.toLocaleString()} in stock online`
+                                (size.stock.warehouse > 0)
+                                    ? `x${size.stock.warehouse?.toLocaleString()} in stock online`
                                     : "Out of stock online"
                             }
                         </Typography>

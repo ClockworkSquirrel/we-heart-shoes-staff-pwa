@@ -74,7 +74,7 @@ const ProductView = () => {
     const [ info, loading, err ] = useAPI(`/product/${style}`)
 
     useLayoutEffect(() => {
-        if (!loading && !err && info.Name)
+        if (!loading && !err && info.name)
             PersistentStore.pushHistory(info)
     })
 
@@ -85,7 +85,7 @@ const ProductView = () => {
                 <CentreSpinner />
             </>
         )
-    } else if (err || !info.Name) {
+    } else if (err || !info.name) {
         return (
             <>
                 <Helmet title="Error" />
@@ -95,7 +95,7 @@ const ProductView = () => {
                     {
                         err
                         ? `${err}`
-                        : !info.Name
+                        : !info.name
                             ? <><strong>{style}</strong> could not be found</>
                             : "Failed to fetch data"
                     }
@@ -105,10 +105,10 @@ const ProductView = () => {
     } else {
         return (
             <div>
-                <Helmet title={info.Name} />
+                <Helmet title={info.name} />
 
                 <Typography variant="h2" className={classes.prodTitle}>
-                    {info.Name}
+                    {info.name}
                 </Typography>
 
                 <div className={classes.categoriesContainer}>
@@ -118,28 +118,29 @@ const ProductView = () => {
                         }
                         className={classes.catBreadcrumbs}
                     >
-                        <Typography className={classes.catCrumb}>
-                            { info.Category }
-                        </Typography>
-
-                        <Typography className={classes.catCrumb}>
-                            { info.Subcategory }
-                        </Typography>
+                        {
+                            info.categories.map(category => (
+                                <Typography className={classes.catCrumb}>
+                                    {category}
+                                </Typography>
+                            ))
+                        }
                     </Breadcrumbs>
 
                     <Typography className={classes.catCrumb}>
-                        { info.StyleCode }
+                        { info.id }
                     </Typography>
                 </div>
 
                 <Typography variant="body2" className={classes.priceText}>
-                        £{ info.Price }
+                    {info.currency === "GBP" ? "\u00A3" : "\u20AC"}
+                    {info.price.current}
                 </Typography>
 
                 <div className={classes.coverImage}>
                     <img
-                        src={info.Thumbnail}
-                        alt={info.Name}
+                        src={info.thumbnail}
+                        alt={info.name}
                     />
 
                     <Tooltip title="View on Shoe Zone" placement="top">
@@ -149,26 +150,22 @@ const ProductView = () => {
                             className={classes.fabCoverImage}
                             component="a"
                             target="_blank"
-                            href={`https://www.shoezone.com/Products/--${info.StyleCode}`}
+                            href={`https://www.shoezone.com/Products/--${info.id}`}
                         >
                             <ShopIcon />
                         </Fab>
                     </Tooltip>
                 </div>
 
-                {
-                    info.SizeType !== "UK" && (
-                        <Alert severity="info">
-                            {`Hold down ${info.SizeType === "EU" ? "an EU" : "a"} size to see the estimated UK equivalent.`}
-                        </Alert>
-                    )
-                }
+                <Alert severity="info">
+                    Hold down a size to see the estimated UK conversions and more information.
+                </Alert>
 
                 <ProductStock
-                    styleCode={info.StyleCode}
-                    sizeRange={info.SizeRange}
+                    styleCode={info.id}
+                    sizeRange={info.sizeRange}
                     className={classes.stockSizeContainer}
-                    category={info.Category}
+                    category={info.categories[0]}
                 />
             </div>
         )
