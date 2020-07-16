@@ -6,13 +6,15 @@ const useAPI = (path = "", options = {}) => {
   const [ hasError, setError ] = useState()
 
   useEffect(() => {
-    setLoading(true)
+    (() => {
+      setLoading(true)
 
-    return fetch(`${process.env.REACT_APP_API_URL}/api${path}`, options)
+      return fetch(`${process.env.REACT_APP_API_URL}/api${path}`, options)
         .then(res => res.json())
         .then(({ result }) => setData(result))
         .catch(err => setError(err.message ?? true))
         .finally(() => setLoading(false))
+    })()
   }, [ path ])
 
   return [ data, loading, hasError ]

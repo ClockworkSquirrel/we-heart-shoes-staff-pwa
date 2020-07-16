@@ -9,7 +9,7 @@ const ProductStock = ({ styleCode = "", sizeRange = [], category = "", ...props 
         <Grid container spacing={.5} {...props}>
             {
                 sizeRange.map(size => (
-                    <Grid item xs={12} key={size.SizeCode}>
+                    <Grid item xs={12} key={size.code}>
                         <ProductStockSize
                             styleCode={styleCode}
                             size={size}

@@ -74,8 +74,10 @@ const ProductView = () => {
     const [ info, loading, err ] = useAPI(`/product/${style}`)
 
     useLayoutEffect(() => {
-        if (!loading && !err && info.name)
-            PersistentStore.pushHistory(info)
+        (() => {
+            if (!loading && !err && info?.name)
+                PersistentStore.pushHistory(info)
+        })()
     })
 
     if (loading) {
@@ -85,7 +87,7 @@ const ProductView = () => {
                 <CentreSpinner />
             </>
         )
-    } else if (err || !info.name) {
+    } else if (err || !info?.name) {
         return (
             <>
                 <Helmet title="Error" />
@@ -95,7 +97,7 @@ const ProductView = () => {
                     {
                         err
                         ? `${err}`
-                        : !info.name
+                        : !info?.name
                             ? <><strong>{style}</strong> could not be found</>
                             : "Failed to fetch data"
                     }
@@ -105,10 +107,10 @@ const ProductView = () => {
     } else {
         return (
             <div>
-                <Helmet title={info.name} />
+                <Helmet title={info?.name} />
 
                 <Typography variant="h2" className={classes.prodTitle}>
-                    {info.name}
+                    {info?.name}
                 </Typography>
 
                 <div className={classes.categoriesContainer}>
@@ -119,7 +121,7 @@ const ProductView = () => {
                         className={classes.catBreadcrumbs}
                     >
                         {
-                            info.categories.map(category => (
+                            info?.categories?.map(category => (
                                 <Typography className={classes.catCrumb}>
                                     {category}
                                 </Typography>
@@ -128,19 +130,19 @@ const ProductView = () => {
                     </Breadcrumbs>
 
                     <Typography className={classes.catCrumb}>
-                        { info.id }
+                        { info?.id }
                     </Typography>
                 </div>
 
                 <Typography variant="body2" className={classes.priceText}>
-                    {info.currency === "GBP" ? "\u00A3" : "\u20AC"}
-                    {info.price.current}
+                    {info?.currency === "GBP" ? "\u00A3" : "\u20AC"}
+                    {info?.price?.current}
                 </Typography>
 
                 <div className={classes.coverImage}>
                     <img
-                        src={info.thumbnail}
-                        alt={info.name}
+                        src={info?.thumbnail}
+                        alt={info?.name}
                     />
 
                     <Tooltip title="View on Shoe Zone" placement="top">
@@ -150,7 +152,7 @@ const ProductView = () => {
                             className={classes.fabCoverImage}
                             component="a"
                             target="_blank"
-                            href={`https://www.shoezone.com/Products/--${info.id}`}
+                            href={`https://www.shoezone.com/Products/--${info?.id}`}
                         >
                             <ShopIcon />
                         </Fab>
@@ -162,10 +164,10 @@ const ProductView = () => {
                 </Alert>
 
                 <ProductStock
-                    styleCode={info.id}
-                    sizeRange={info.sizeRange}
+                    styleCode={info?.id}
+                    sizeRange={info?.sizeRange}
                     className={classes.stockSizeContainer}
-                    category={info.categories[0]}
+                    category={info.categories?.[0]}
                 />
             </div>
         )
