@@ -46,10 +46,24 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.grey[600],
         marginTop: "-0.29rem"
     },
+    cardOffers: {
+        fontSize: "0.71rem",
+        fontWeight: theme.typography.fontWeightBold,
+        color: theme.palette.grey[600],
+        marginTop: "-0.29rem"
+    },
     cardPrice: {
         fontSize: "1rem",
         fontWeight: theme.typography.fontWeightRegular,
         marginTop: "auto"
+    },
+    miniInfo: {
+        display: "flex",
+        flexDirection: "row"
+    },
+    flexSpacer: {
+        display: "block",
+        flexGrow: 1
     }
 }))
 
@@ -63,7 +77,7 @@ const HistoryList = () => {
                     product => (
                         <Grid item xs={12} key={product.StyleCode}>
                             <Card elevation={0} className={classes.productCard}>
-                                <CardActionArea 
+                                <CardActionArea
                                     component={Link}
                                     to={`/product/${product.StyleCode}`}
                                     className={classes.cardRoot}
@@ -82,18 +96,33 @@ const HistoryList = () => {
                                             { product.Name }
                                         </Typography>
 
-                                        <Typography
-                                            variant="subtitle1"
-                                            className={classes.cardStyleCode}
-                                        >
-                                            { product.StyleCode }
-                                        </Typography>
+                                        <div className={classes.miniInfo}>
+                                            <Typography
+                                                variant="subtitle1"
+                                                className={classes.cardStyleCode}
+                                            >
+                                                { product.StyleCode }
+                                            </Typography>
+
+                                            <div className={classes.flexSpacer}></div>
+
+                                            {
+                                                product?.Offers?.map(offer => (
+                                                    <Typography
+                                                        variant="subtitle1"
+                                                        className={classes.cardOffers}
+                                                    >
+                                                        { offer?.abbr ?? offer?.name }
+                                                    </Typography>
+                                                ))
+                                            }
+                                        </div>
 
                                         <Typography
                                             variant="body1"
                                             className={classes.cardPrice}
                                         >
-                                            £{ product.Price }
+                                            {product?.Currency === "EUR" ? "\u20AC" : "\u00A3"}{ product.Price }
                                         </Typography>
                                     </CardContent>
                                 </CardActionArea>

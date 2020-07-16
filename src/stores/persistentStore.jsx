@@ -23,7 +23,9 @@ const PersistentStore = store({
                 StyleCode: productInfo.id,
                 Name: productInfo.name,
                 Price: productInfo.price.current,
-                Thumbnail: productInfo.thumbnail
+                Currency: productInfo.currency,
+                Thumbnail: productInfo.thumbnail,
+                Offers: productInfo.offers ?? []
             })
         } else {
             PersistentStore.data.history.splice(

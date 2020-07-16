@@ -51,11 +51,10 @@ const useStyles = makeStyles(theme => ({
         overflow: "hidden",
         borderRadius: theme.shape.borderRadius,
         margin: theme.spacing(1, 0),
-        border: `1px solid ${theme.palette.divider}`,
-
-        "& img": {
-            width: "100%"
-        }
+        border: `1px solid ${theme.palette.divider}`
+    },
+    productThumb: {
+        width: "100%"
     },
     fabCoverImage: {
         position: "absolute",
@@ -64,6 +63,24 @@ const useStyles = makeStyles(theme => ({
     },
     stockSizeContainer: {
         marginTop: theme.spacing(1)
+    },
+    offersContainer: {
+        display: "flex",
+        width: "100%",
+        marginTop: theme.spacing(1),
+        alignItems: "end",
+        justifyContent: "flex-end",
+        flexDirection: "row",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        padding: theme.spacing(2, 3, 0, 2)
+    },
+    offerIcon: {
+        width: 96,
+        height: 96,
+        flexGrow: 0,
+        display: "inline-block"
     }
 }))
 
@@ -140,9 +157,24 @@ const ProductView = () => {
                 </Typography>
 
                 <div className={classes.coverImage}>
+                    <div className={classes.offersContainer}>
+                        {
+                            info?.offers?.map(offer => (
+                                <Tooltip title={`This item is in the ${offer?.abbr ?? offer?.name} offer`} placement="top">
+                                    <img
+                                        src={offer?.image}
+                                        alt={offer?.name}
+                                        className={classes.offerIcon}
+                                        />
+                                </Tooltip>
+                            ))
+                        }
+                    </div>
+
                     <img
                         src={info?.thumbnail}
                         alt={info?.name}
+                        className={classes.productThumb}
                     />
 
                     <Tooltip title="View on Shoe Zone" placement="top">
