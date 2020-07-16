@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/we-heart-shoes-staff-pwa/static/js/main.850bf9dd.chunk.js",
-    "main.js.map": "/we-heart-shoes-staff-pwa/static/js/main.850bf9dd.chunk.js.map",
+    "main.js": "/we-heart-shoes-staff-pwa/static/js/main.1ef2f34f.chunk.js",
+    "main.js.map": "/we-heart-shoes-staff-pwa/static/js/main.1ef2f34f.chunk.js.map",
     "runtime~main.js": "/we-heart-shoes-staff-pwa/static/js/runtime~main.8ba85df4.js",
     "runtime~main.js.map": "/we-heart-shoes-staff-pwa/static/js/runtime~main.8ba85df4.js.map",
     "static/js/2.da568f20.chunk.js": "/we-heart-shoes-staff-pwa/static/js/2.da568f20.chunk.js",
     "static/js/2.da568f20.chunk.js.map": "/we-heart-shoes-staff-pwa/static/js/2.da568f20.chunk.js.map",
     "index.html": "/we-heart-shoes-staff-pwa/index.html",
-    "precache-manifest.b6b0dac55b4676b0ab63d6825c1e8ad1.js": "/we-heart-shoes-staff-pwa/precache-manifest.b6b0dac55b4676b0ab63d6825c1e8ad1.js",
+    "precache-manifest.929e5f334e37a5c6cf1f109efae67b32.js": "/we-heart-shoes-staff-pwa/precache-manifest.929e5f334e37a5c6cf1f109efae67b32.js",
     "service-worker.js": "/we-heart-shoes-staff-pwa/service-worker.js"
   }
 }
