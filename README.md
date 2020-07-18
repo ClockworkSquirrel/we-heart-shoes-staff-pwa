@@ -32,13 +32,18 @@ we:heart:shoes is built using [React](https://github.com/facebook/react/) on the
 
 ## Additional Resources
 ### REST API
-The REST API is hosted on RunKit and performs core functionality for the client, such as locating the user's nearest store, retrieving product details, and checking a store's stock levels.
+The REST API is hosted on Glitch and performs core functionality for the client, such as locating the user's nearest store, retrieving product details, and checking a store's stock levels.
 
 **The source code for the server can be found here:**
 https://github.com/ClockworkSquirrel/we-heart-shoes-api
 
 **The public API is hosted at:**
 https://whs-endpoints.glitch.me
+
+Due to limitations with Shoe Zone's APIs, some data retrieval is slow, as the webpage itself must be downloaded and scraped
+before returning the required information. This currently includes product information. Other data, such as the store
+locator and store stock level APIs are already available in a somewhat ready-to-use JSON format, in addition to being
+cached on the server, and so these methods return much faster.
 
 ### Frameworks
 * React - https://github.com/facebook/react/
