@@ -8,14 +8,16 @@ import { Helmet } from "react-helmet"
 import { HashRouter as Router, Switch, Route } from "react-router-dom"
 import { CssBaseline } from "@material-ui/core"
 import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles"
+import { Alert, AlertTitle } from "@material-ui/lab"
 
 import Header from "./header"
 import ScannerModal from "./scanner-modal"
 import CentreSpinner from "./centre-spinner"
 
+import useServiceWorker from "./service-worker"
+
 import HomeView from "../views/index"
 import ProductView from "../views/product"
-import { Alert, AlertTitle } from "@material-ui/lab"
 
 const defaultTheme = createMuiTheme({
   typography: {
@@ -43,6 +45,8 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const classes = useStyles()
+
+  useServiceWorker()
 
   return (
     <div>

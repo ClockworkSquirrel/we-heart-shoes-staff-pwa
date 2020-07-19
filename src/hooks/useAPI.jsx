@@ -15,6 +15,14 @@ const useAPI = (path = "", options = {}) => {
         .catch(err => setError(err.message ?? true))
         .finally(() => setLoading(false))
     })()
+
+    /*
+      If I add "options" to the dependency array, it'll just continue
+      to be in a "loading" state forever; therefore, I'm ignoring the
+      warning.
+    */
+
+    // eslint-disable-next-line
   }, [ path ])
 
   return [ data, loading, hasError ]
