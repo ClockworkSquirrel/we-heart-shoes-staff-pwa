@@ -18,22 +18,29 @@ const PersistentStore = store({
             }
         }
 
+        const updatedProductInfo = {
+            StyleCode: productInfo.id,
+            Name: productInfo.name,
+            Price: productInfo.price.current,
+            Currency: productInfo.currency,
+            Thumbnail: productInfo.thumbnail,
+            Offers: productInfo.offers ?? []
+        }
+
         if (matchedIndex === undefined) {
-            PersistentStore.data.history.unshift({
-                StyleCode: productInfo.id,
-                Name: productInfo.name,
-                Price: productInfo.price.current,
-                Currency: productInfo.currency,
-                Thumbnail: productInfo.thumbnail,
-                Offers: productInfo.offers ?? []
-            })
+            PersistentStore.data.history.unshift(updatedProductInfo)
         } else {
+            PersistentStore.data.history[matchedIndex] = {
+                ...PersistentStore.data.history[matchedIndex],
+                ...updatedProductInfo
+            }
+
             PersistentStore.data.history.splice(
                 0, 0, PersistentStore.data.history.splice(matchedIndex, 1)[0]
             )
         }
 
-        while (PersistentStore.data.history.length > 8) {
+        while (PersistentStore.data.history.length > process.env.REACT_APP_MAX_HISTORY_ITEMS) {
             PersistentStore.data.history.pop()
         }
     },

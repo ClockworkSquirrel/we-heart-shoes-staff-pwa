@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     },
     codeInputBox: {
         borderRadius: theme.shape.borderRadius,
-        
+
         "& input::-webkit-outer-spin-button, input::-webkit-inner-spin-button": {
             WebkitAppearance: "none"
         }
@@ -30,9 +30,11 @@ const HeaderSearchInput = () => {
 
     const onSearchSubmit = evt => {
         evt.preventDefault()
-        
-        const style = styleCode.trim().replace(/[^\d]/g, "").substr(0, 5)
-        if (style.length !== 5) return
+
+        let style = styleCode.trim().replace(/[^\d]/g, "")
+
+        if (!(style.length - 3 < 5))
+            style = style.substr(0, style.length - 3)
 
         history.push(`/product/${style}`)
     }
@@ -53,8 +55,8 @@ const HeaderSearchInput = () => {
                     <FilledInput
                         id="product-code-search"
                         type="number"
-                        min={10000}
-                        max={99999}
+                        min={process.env.REACT_APP_MIN_PRODUCT_CODE}
+                        max={process.env.REACT_APP_MAX_PRODUCT_CODE}
 
                         endAdornment={
                             <InputAdornment position="end">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 
 import { view } from "@risingstack/react-easy-state"
@@ -35,24 +35,32 @@ const ScannerModal = () => {
 
     const onModalCloseHandler = () => EphemeralStore.scanOpen = false
 
-    let scanDebounce = false
+    const [ lastScannedCode, setLastScannedCode ] = useState()
     const onBarcodeScanned = (err, result) => {
-        if (scanDebounce || err || !result) return
-        scanDebounce = true
-        
+        if (err || !result) return
+
         const fullBarcode = (result.text ?? "").trim().replace(/[^\d]/g, "")
-        const styleCode = fullBarcode.substr(0, 5)
+        const styleCode = !(fullBarcode.length - 3 < 5) ? fullBarcode.substr(0, fullBarcode.length - 3) : fullBarcode
 
-        if (styleCode.length !== 5) {
-            scanDebounce = false
-            return
-        }
+        if (lastScannedCode === styleCode)
+            return onModalCloseHandler()
 
+        setLastScannedCode(styleCode)
         onModalCloseHandler()
 
         history.push(`/product/${styleCode}`)
-        scanDebounce = false
     }
+
+    /*
+        React will warn that EphemeralStore isn't a valid dependency, as outer-scope
+        values don't affect the re-rendering of a component; however, EphemeralStore
+        is part of the react-easy-state package, and stores a value which determines
+        whether the scanner modal is open or closed. Therefore, changes in
+        EphemeralStore *will* affect re-rendering of the comonent.
+    */
+
+    // eslint-disable-next-line
+    useEffect(() => setLastScannedCode(null), [ EphemeralStore.scanOpen ])
 
     useEffect(() => {
         const { search } = history.location

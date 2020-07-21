@@ -32,6 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 const HomeView = () => {
     const classes = useStyles()
+    const historyLength = PersistentStore.data.history.length
 
     const onClearHistoryClicked = evt => {
         evt.preventDefault()
@@ -42,18 +43,24 @@ const HomeView = () => {
         <div>
             <Helmet title="Home" />
 
-            <ButtonBase
-                className={classes.historyClearButton}
-                onClick={onClearHistoryClicked}
-            >
-                <Typography variant="h2" className={classes.historyHeader}>
-                    History
-                </Typography>
+            {
+                historyLength
+                    ? (
+                        <ButtonBase
+                            className={classes.historyClearButton}
+                            onClick={onClearHistoryClicked}
+                        >
+                            <Typography variant="h2" className={classes.historyHeader}>
+                                History
+                            </Typography>
 
-                <Typography variant="body1" className={classes.historyClearText}>
-                    Clear
-                </Typography>
-            </ButtonBase>
+
+                            <Typography variant="body1" className={classes.historyClearText}>
+                                Clear {historyLength.toLocaleString()} item{historyLength > 1 ? "s" : ""}
+                            </Typography>
+                        </ButtonBase>
+                    ) : ""
+            }
 
             <HistoryList />
         </div>
