@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { Snackbar, Button } from "@material-ui/core"
+import { Snackbar, Button, Slide } from "@material-ui/core"
 import * as serviceWorker from "../serviceWorker"
 
 const ServiceWorker = () => {
@@ -37,10 +37,11 @@ const ServiceWorker = () => {
                     size="small"
                     onClick={onSnackbarButtonClick}
                 >
-                    Update
+                    Reload
                 </Button>
             }
-            message="Update available! Reload to see changes."
+            message="A new version has been installed!"
+            TransitionComponent={Slide}
         />
     )
 }

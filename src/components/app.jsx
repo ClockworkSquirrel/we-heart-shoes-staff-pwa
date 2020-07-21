@@ -13,6 +13,7 @@ import { Alert, AlertTitle } from "@material-ui/lab"
 import Header from "./header"
 import ScannerModal from "./scanner-modal"
 import CentreSpinner from "./centre-spinner"
+import HomeFAB from "./home-fab"
 
 import ServiceWorker from "./service-worker"
 
@@ -36,7 +37,8 @@ const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     padding: theme.spacing(2),
     maxWidth: 500,
-    margin: `${theme.spacing(1)}px auto`
+    margin: `${theme.spacing(1)}px auto`,
+    position: "relative"
   },
   geoError: {
     marginTop: theme.spacing(2)
@@ -84,6 +86,8 @@ const App = () => {
                     </Switch>
                   : <CentreSpinner />
             }
+
+            <HomeFAB />
 
             <ScannerModal />
           </Router>
