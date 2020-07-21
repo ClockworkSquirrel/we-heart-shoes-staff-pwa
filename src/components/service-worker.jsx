@@ -1,10 +1,25 @@
-import { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
+import { Snackbar, Button } from "@material-ui/core"
 import * as serviceWorker from "../serviceWorker"
 
 const ServiceWorker = () => {
+    const [showReload, setShowReload] = useState(false)
+    const [updatedWorker, setUpdatedWorker] = useState()
+
     const onServiceWorkerUpdated = ({ waiting: waitingWorker }) => {
-        waitingWorker.postMessage({ type: "SKIP_WAITING" })
+        setUpdatedWorker(waitingWorker)
+        setShowReload(true)
+    }
+
+    const onSnackbarButtonClick = evt => {
+        evt.preventDefault()
+
+        setShowReload(false)
+
+        if (updatedWorker)
+            updatedWorker.postMessage({ type: "SKIP_WAITING" })
+
         window.location.reload()
     }
 
@@ -12,21 +27,22 @@ const ServiceWorker = () => {
         serviceWorker.register({ onUpdate: onServiceWorkerUpdated })
     }, [])
 
-    /*
-        I figured this app would work best if it just auto-reloaded
-        when an update was detected, but really you could render
-        a snackbar or some form of notification to prompt the user
-        to manually update (or inform them that it'll update next time
-        they reopen the app).
-    */
-
-    /*
-        return (
-            <div>
-
-            </div>
-        )
-    */
+    return (
+        <Snackbar
+            open={showReload}
+            onClick={() => setShowReload(false)}
+            action={
+                <Button
+                    color="inherit"
+                    size="small"
+                    onClick={onSnackbarButtonClick}
+                >
+                    Update
+                </Button>
+            }
+            message="Update available! Reload to see changes."
+        />
+    )
 }
 
 export default ServiceWorker

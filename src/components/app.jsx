@@ -14,7 +14,7 @@ import Header from "./header"
 import ScannerModal from "./scanner-modal"
 import CentreSpinner from "./centre-spinner"
 
-import useServiceWorker from "./service-worker"
+import ServiceWorker from "./service-worker"
 
 import HomeView from "../views/index"
 import ProductView from "../views/product"
@@ -45,8 +45,6 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const classes = useStyles()
-
-  useServiceWorker()
 
   return (
     <div>
@@ -89,6 +87,8 @@ const App = () => {
 
             <ScannerModal />
           </Router>
+
+          <ServiceWorker />
         </div>
       </ThemeProvider>
     </div>
