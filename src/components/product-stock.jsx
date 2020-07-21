@@ -14,6 +14,8 @@ const ProductStock = ({ styleCode = "", sizeRange = [], category = "", ...props 
                             styleCode={styleCode}
                             size={size}
                             category={category}
+                            autoCheck={sizeRange.length === 1}
+                            useIcon={sizeRange.length === 1}
                         />
                     </Grid>
                 ))

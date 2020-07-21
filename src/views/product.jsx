@@ -81,6 +81,9 @@ const useStyles = makeStyles(theme => ({
         height: 96,
         flexGrow: 0,
         display: "inline-block"
+    },
+    productDescription: {
+        margin: theme.spacing(1, 0, 3)
     }
 }))
 
@@ -191,8 +194,18 @@ const ProductView = () => {
                     </Tooltip>
                 </div>
 
+                <div className={classes.productDescription}>
+                    <Typography variant="h4" className={classes.catCrumb}>
+                        Description
+                    </Typography>
+
+                    <Typography variant="body2">
+                        {info?.description}
+                    </Typography>
+                </div>
+
                 <Alert severity="info">
-                    Hold down a size to see the estimated UK conversions and more information.
+                    Hold down a size to see the estimated size conversions for European sizes or S/M/L/XL sizing.
                 </Alert>
 
                 <ProductStock

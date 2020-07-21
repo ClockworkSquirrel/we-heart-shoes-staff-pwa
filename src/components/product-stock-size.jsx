@@ -8,6 +8,11 @@ import { Card, CardActionArea, Typography, CardContent, Tooltip } from "@materia
 import { makeStyles } from "@material-ui/core/styles"
 
 import CentreSpinner from "./centre-spinner"
+import { useLayoutEffect } from "react"
+
+import StockNoneIcon from "@material-ui/icons/Close"
+import StockUnknownIcon from "@material-ui/icons/Help"
+import StockFoundIcon from "@material-ui/icons/Done"
 
 const useStyles = makeStyles(theme => ({
     sizeCard: {
@@ -130,7 +135,9 @@ const euSizeToUK = (size = "", gender = "W") => {
 const ProductStockSize = ({
     styleCode = "",
     size = {},
-    category = ""
+    category = "",
+    autoCheck = false,
+    useIcon = false
 }) => {
     const classes = useStyles()
 
@@ -146,9 +153,7 @@ const ProductStockSize = ({
     const [ stockRequested, setRequested ] = useState(false)
     const [ hasError, setError ] = useState(false)
 
-    const onCardClicked = evt => {
-        evt.preventDefault()
-
+    const checkForStock = () => {
         setRequested(true)
         setLoading(true)
 
@@ -160,12 +165,22 @@ const ProductStockSize = ({
         .finally(() => setLoading(false))
     }
 
+    const onCardClicked = evt => {
+        evt.preventDefault()
+        checkForStock()
+    }
+
     const sizeType = determineSizeType(size.size)
     const sizeTooltipContent = sizeType === "EU"
                         ? `UK Size ${euSizeToUK(size.size, category?.[0]?.[0]?.toUpperCase())} (est.)`
                         : sizeType === "UK"
                             ? ""
                             : `UK Size ${letterSizeToRange(size.size, category?.[0]?.[0]?.toUpperCase())} (est.)`
+
+    useLayoutEffect(() => {
+        if (autoCheck) checkForStock()
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <Card elevation={0} className={classes.sizeCard} key={size.code}>
@@ -187,7 +202,13 @@ const ProductStockSize = ({
                             {
                                 isLoading
                                     ? <CentreSpinner size="1.71rem" />
-                                    : size.size
+                                    : useIcon
+                                        ? stockRequested
+                                            ? inStock
+                                                ? <StockFoundIcon />
+                                                : <StockNoneIcon />
+                                            : <StockUnknownIcon />
+                                        : size.size
                             }
                         </Typography>
                     </div>
