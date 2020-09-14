@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
 
         "& *.tcqr-cell-empty": {
             fill: "transparent",
-        }
+        },
 
         [theme.breakpoints.only("xs")]: {
             width: "80%",
