@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "060fe609eb6ab138bf853552c5e419f7",
+    "revision": "c10e58b498461be78d5b52663d5be411",
     "url": "/we-heart-shoes-staff-pwa/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/we-heart-shoes-staff-pwa/static/js/2.74812951.chunk.js"
   },
   {
-    "revision": "925dc1cf73b7b4f50cfe",
-    "url": "/we-heart-shoes-staff-pwa/static/js/main.1eca06b2.chunk.js"
+    "revision": "5aacad83d93e14339656",
+    "url": "/we-heart-shoes-staff-pwa/static/js/main.283b26ac.chunk.js"
   },
   {
     "revision": "9abdf9da71adf9197344",
