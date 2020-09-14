@@ -1,6 +1,8 @@
 import React, { useState } from "react"
 import clsx from "clsx"
 
+import config from "../config.json"
+
 import { view } from "@risingstack/react-easy-state"
 import EphemeralStore from "../stores/ephemeralStore"
 
@@ -157,7 +159,7 @@ const ProductStockSize = ({
         setRequested(true)
         setLoading(true)
 
-        return fetch(`${process.env.REACT_APP_API_URL}/api/stock/${storeId}/${styleCode}${size.code}`)
+        return fetch(`${config.endpoints.api}/api/stock/${storeId}/${styleCode}${size.code}`)
             .then(res => res.json()).then(({ result }) => {
                 setInStock(result?.inStock)
             })
