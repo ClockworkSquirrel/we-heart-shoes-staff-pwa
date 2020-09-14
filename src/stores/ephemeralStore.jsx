@@ -1,4 +1,5 @@
 import { store } from "@risingstack/react-easy-state"
+import config from "../config.json"
 
 const getGeoCoords = () => new Promise((resolve, reject) => {
     if (!navigator.geolocation)
@@ -14,11 +15,13 @@ const getGeoCoords = () => new Promise((resolve, reject) => {
 
 const EphemeralStore = store({
     store: {},
-    scanOpen: false,
     fflags: {},
 
+    scanOpen: false,
+    tillCardDialogueOpen: false,
+
     fetchNearestStore: async () => getGeoCoords().then(
-        ({ lat, lon }) => fetch(`${process.env.REACT_APP_API_URL}/api/locate/?lat=${lat}&lon=${lon}`)
+        ({ lat, lon }) => fetch(`${config.endpoints.api}/api/locate/?lat=${lat}&lon=${lon}`)
     ).then(res => res.json()).then(({ result }) => {
         EphemeralStore.store = {
             name: result.storeName,

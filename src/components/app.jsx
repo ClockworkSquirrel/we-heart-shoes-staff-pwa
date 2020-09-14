@@ -34,7 +34,7 @@ const defaultTheme = createMuiTheme({
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    overflow: "hidden",
+    // overflow: "hidden",
     padding: theme.spacing(2),
     maxWidth: 500,
     margin: `${theme.spacing(1)}px auto`,

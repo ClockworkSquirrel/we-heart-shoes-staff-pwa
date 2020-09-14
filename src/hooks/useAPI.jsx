@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import config from "../config.json"
 
 const useAPI = (path = "", options = {}) => {
   const [ data, setData ] = useState({})
@@ -9,7 +10,7 @@ const useAPI = (path = "", options = {}) => {
     (() => {
       setLoading(true)
 
-      return fetch(`${process.env.REACT_APP_API_URL}/api${path}`, options)
+      return fetch(`${config.endpoints.api}/api${path}`, options)
         .then(res => res.json())
         .then(({ result }) => setData(result))
         .catch(err => setError(err.message ?? true))

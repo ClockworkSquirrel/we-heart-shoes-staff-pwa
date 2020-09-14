@@ -1,0 +1,7 @@
+{
+    "endpoints": {
+        "api": "https://whs-endpoints.glitch.me"
+    },
+
+    "historyMaxItems": 12
+}

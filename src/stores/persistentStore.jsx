@@ -1,10 +1,12 @@
 import { store, autoEffect } from "@risingstack/react-easy-state"
+import config from "../config.json"
 
 const storageKey = "_state"
 const savedState = JSON.parse(localStorage.getItem(storageKey))
 
 const PersistentStore = store({
     data: {
+        tillCardId: null,
         history: [],
         ...savedState
     },
@@ -40,12 +42,14 @@ const PersistentStore = store({
             )
         }
 
-        while (PersistentStore.data.history.length > process.env.REACT_APP_MAX_HISTORY_ITEMS) {
+        while (PersistentStore.data.history.length > config.historyMaxItems) {
             PersistentStore.data.history.pop()
         }
     },
 
-    clearHistory: async () => PersistentStore.data.history = []
+    clearHistory: async () => PersistentStore.data.history = [],
+
+    setTillCard: async tillCardId => PersistentStore.data.tillCardId = tillCardId,
 })
 
 autoEffect(() => {

@@ -1,4 +1,5 @@
 import React from "react"
+import { Helmet } from "react-helmet"
 
 import { view } from "@risingstack/react-easy-state"
 import PersistentStore from "../stores/persistentStore"
@@ -7,7 +8,7 @@ import { Typography, ButtonBase } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 
 import HistoryList from "../components/history-list"
-import { Helmet } from "react-helmet"
+import TillCard from "../components/till-card"
 
 const useStyles = makeStyles(theme => ({
     historyHeader: {
@@ -42,6 +43,8 @@ const HomeView = () => {
     return (
         <div>
             <Helmet title="Home" />
+
+            <TillCard />
 
             {
                 historyLength
