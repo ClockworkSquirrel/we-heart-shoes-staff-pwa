@@ -68,6 +68,10 @@ const useStyles = makeStyles(theme => ({
         "& *.tcqr-cell-empty": {
             fill: "transparent",
         }
+
+        [theme.breakpoints.only("xs")]: {
+            width: "80%",
+        },
     },
     tillCardCodeText: {
         fontWeight: theme.typography.fontWeightBold,
